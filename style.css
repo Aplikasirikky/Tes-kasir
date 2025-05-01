@@ -1,0 +1,109 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f8ff; /* Warna latar belakang yang lebih cerah */
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px; /* Sudut yang lebih bulat */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Bayangan yang lebih dalam */
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50; /* Warna yang lebih gelap untuk kontras */
+    font-size: 2.5em; /* Ukuran huruf lebih besar */
+    margin-bottom: 20px; /* Jarak bawah yang lebih besar */
+}
+
+button {
+    margin: 5px;
+    padding: 12px 20px; /* Padding yang lebih besar */
+    background-color: #3498db; /* Warna biru yang lebih cerah */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em; /* Ukuran font yang konsisten */
+    transition: background-color 0.3s ease, transform 0.2s; /* Transisi halus */
+}
+
+button:hover {
+    background-color: #2980b9; /* Warna saat hover */
+    transform: translateY(-2px); /* Efek angkat saat hover */
+}
+
+#content {
+    margin-top: 30px; /* Jarak atas yang lebih besar */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px; /* Meningkatkan padding */
+    text-align: left;
+}
+
+th {
+    background-color: #3498db; /* Mengganti warna header tabel */
+    color: white; /* Mengubah warna teks header */
+    font-weight: bold; /* Menebalkan teks header */
+}
+
+tr:nth-child(even) {
+    background-color: #ecf0f1; /* Warna latar belakang untuk baris genap */
+}
+
+tr:hover {
+    background-color: #d5dbdb; /* Warna latar belakang saat hover */
+}
+
+input {
+    margin: 5px;
+    padding: 12px;
+    width: calc(100% - 24px); /* Memastikan input tetap proporsional */
+    border: 1px solid #ccc; /* Warna border yang lebih lembut */
+    border-radius: 5px;
+    transition: border-color 0.3s; /* Transisi border */
+}
+
+input:focus {
+    border-color: #3498db; /* Warna border saat fokus */
+    outline: none; /* Menghilangkan outline default */
+}
+
+input[type="number"] {
+    width: calc(33% - 24px); /* Memastikan input angka tetap proporsional */
+}
+
+@media (max-width: 600px) {
+    input {
+        width: calc(100% - 24px); /* Menjaga responsivitas input */
+    }
+    button {
+        width: 100%; /* Tombol penuh di perangkat kecil */
+    }
+}
+
+.alert {
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #3498db;
+    border-radius: 5px;
+    color: #333;
+    background-color: #eaf8ff; /* Warna latar belakang alert yang lebih lembut */
+    display: none; /* Disembunyikan secara default */
+}
