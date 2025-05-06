@@ -1,6 +1,6 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f8ff; /* Warna latar belakang yang lebih cerah */
+    background-color: #f4f4f9; /* Warna latar belakang netral */
     margin: 0;
     padding: 20px;
 }
@@ -8,23 +8,23 @@ body {
 .container {
     max-width: 800px;
     margin: auto;
-    background: white;
+    background: #ffffff; /* Warna latar belakang putih */
     padding: 30px;
-    border-radius: 10px; /* Sudut yang lebih bulat */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Bayangan yang lebih dalam */
+    border-radius: 15px; /* Sudut yang lebih bulat */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); /* Bayangan yang lebih dalam */
 }
 
 h1 {
     text-align: center;
-    color: #2c3e50; /* Warna yang lebih gelap untuk kontras */
+    color: #34495e; /* Warna yang lebih gelap untuk kontras */
     font-size: 2.5em; /* Ukuran huruf lebih besar */
     margin-bottom: 20px; /* Jarak bawah yang lebih besar */
 }
 
 button {
     margin: 5px;
-    padding: 12px 20px; /* Padding yang lebih besar */
-    background-color: #3498db; /* Warna biru yang lebih cerah */
+    padding: 14px 24px; /* Padding yang lebih besar */
+    background-color: #007bff; /* Warna biru cerah */
     color: white;
     border: none;
     border-radius: 5px;
@@ -34,7 +34,7 @@ button {
 }
 
 button:hover {
-    background-color: #2980b9; /* Warna saat hover */
+    background-color: #0056b3; /* Warna saat hover */
     transform: translateY(-2px); /* Efek angkat saat hover */
 }
 
@@ -58,13 +58,13 @@ th, td {
 }
 
 th {
-    background-color: #3498db; /* Mengganti warna header tabel */
+    background-color: #007bff; /* Mengganti warna header tabel */
     color: white; /* Mengubah warna teks header */
     font-weight: bold; /* Menebalkan teks header */
 }
 
 tr:nth-child(even) {
-    background-color: #ecf0f1; /* Warna latar belakang untuk baris genap */
+    background-color: #f2f2f2; /* Warna latar belakang untuk baris genap */
 }
 
 tr:hover {
@@ -81,7 +81,7 @@ input {
 }
 
 input:focus {
-    border-color: #3498db; /* Warna border saat fokus */
+    border-color: #007bff; /* Warna border saat fokus */
     outline: none; /* Menghilangkan outline default */
 }
 
@@ -101,7 +101,7 @@ input[type="number"] {
 .alert {
     padding: 12px;
     margin: 10px 0;
-    border: 1px solid #3498db;
+    border: 1px solid #007bff; /* Warna border yang lebih cerah */
     border-radius: 5px;
     color: #333;
     background-color: #eaf8ff; /* Warna latar belakang alert yang lebih lembut */
