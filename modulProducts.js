@@ -92,6 +92,53 @@ function clearAllProducts() {
     }
 }
 
+function showUpdateProduct() {
+    let content = '<h2>Pilih Produk untuk Diperbarui</h2>';
+    content += '<input id="searchUpdate" placeholder="Cari Produk" onkeyup="searchUpdateProducts()" />'; // Input pencarian
+    content += '<table><tr><th>Nama Produk</th><th>Aksi</th></tr>';
+    
+    products.forEach((product, index) => {
+        content += `<tr>
+            <td>${product.name}</td>
+            <td><button onclick="editProduct(${index})">Edit</button></td>
+        </tr>`;
+    });
+
+    content += '</table><button onclick="goToMainMenu()">Kembali ke Menu Utama</button>';
+    document.getElementById('content').innerHTML = content;
+}
+
+function printReport() {
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write('<html><head><title>Laporan Penjualan</title></head><body>');
+    printWindow.document.write(document.getElementById('content').innerHTML);
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    printWindow.print();
+}
+
+function printProducts() {
+    let content = '<h2>Daftar Produk</h2><table><tr><th>Nama</th><th>Harga Beli</th><th>Harga Jual</th><th>Stok</th></tr>';
+    
+    products.forEach(product => {
+        content += `<tr>
+            <td>${product.name}</td>
+            <td>${formatRupiah(product.buyPrice)}</td>
+            <td>${formatRupiah(product.sellPrice)}</td>
+            <td>${product.stock}</td>
+        </tr>`;
+    });
+
+    content += '</table>';
+    
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write('<html><head><title>Daftar Produk</title></head><body>');
+    printWindow.document.write(content);
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    printWindow.print();
+}
+
 function uploadProducts() {
     const fileInput = document.getElementById('fileInput');
     const file = fileInput.files[0];
