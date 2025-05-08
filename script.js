@@ -9,6 +9,44 @@ let cash = JSON.parse(localStorage.getItem('cash')) || 0; // Inisialisasi kas da
 let expenses = JSON.parse(localStorage.getItem('expenses')) || []; // Inisialisasi pengeluaran dari localStorage
 let dailySales = JSON.parse(localStorage.getItem('dailySales')) || {}; // Inisialisasi data penjualan harian dari localStorage
 
+function downloadAllData() {
+    let csvContent = "data:text/csv;charset=utf-8,";
+    csvContent += "Tipe Data,Nama Produk,Harga Beli,Harga Jual,Stok,Jumlah Penjualan,Total Hutang,Nama Pelanggan,Hutang\n";
+
+    // Data Produk
+    products.forEach(product => {
+        const salesCount = sales.filter(sale => sale.productName === product.name).length;
+        csvContent += `Produk,${product.name},${product.buyPrice},${product.sellPrice},${product.stock},${salesCount},,\n`;
+    });
+
+    // Data Hutang
+    for (const customer in debts) {
+        const totalDebt = debts[customer].total;
+        csvContent += `Hutang,, , , , ,${customer},${totalDebt}\n`;
+    }
+
+    // Data Pengeluaran
+    expenses.forEach(expense => {
+        csvContent += `Pengeluaran,, , , , , ,${expense.description},${expense.amount}\n`;
+    });
+
+    // Data Keuntungan
+    for (const productName in profit) {
+        csvContent += `Keuntungan,, , , , ,${productName},${profit[productName]}\n`;
+    }
+
+    // Data Kas
+    csvContent += `Kas,, , , , ,Total Kas,${cash}\n`;
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "semua_data.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
 function resetAllData() {
     if (confirm("Apakah Anda yakin ingin mereset semua data?")) {
         localStorage.clear(); // Menghapus semua data dari localStorage
