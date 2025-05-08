@@ -182,3 +182,10 @@ function uploadData(event) {
         reader.readAsText(file);
     }
 }
+
+function ambilKeuntungan() {
+    keuntungan = 0; // Mengosongkan keuntungan
+    saveSaldo('keuntungan', keuntungan); // Simpan keuntungan yang telah direset
+    displayResults(); // Perbarui tampilan keuntungan
+    alert("Keuntungan telah diambil.");
+}
