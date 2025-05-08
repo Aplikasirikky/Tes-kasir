@@ -9,6 +9,25 @@ let cash = JSON.parse(localStorage.getItem('cash')) || 0; // Inisialisasi kas da
 let expenses = JSON.parse(localStorage.getItem('expenses')) || []; // Inisialisasi pengeluaran dari localStorage
 let dailySales = JSON.parse(localStorage.getItem('dailySales')) || {}; // Inisialisasi data penjualan harian dari localStorage
 
+function resetAllData() {
+    if (confirm("Apakah Anda yakin ingin mereset semua data?")) {
+        localStorage.clear(); // Menghapus semua data dari localStorage
+        products = [];
+        sales = [];
+        profit = {};
+        customers = [];
+        debts = {};
+        detailedDebts = {};
+        users = [];
+        cash = 0;
+        expenses = [];
+        dailySales = {};
+
+        alert('Semua data telah berhasil direset!');
+        showMainMenu(); // Tampilkan menu utama setelah reset
+    }
+}
+
 function formatDate(dateString) {
     const date = new Date(dateString);
     const day = String(date.getDate()).padStart(2, '0'); // Menambahkan 0 di depan jika kurang dari 10
