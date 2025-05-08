@@ -20,67 +20,32 @@ h1 {
     margin-bottom: 30px;
 }
 
-.dashboard {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+/* Gaya untuk Bagian Laporan */
+h1 {
+    margin-bottom: 20px;
 }
 
-.saldo {
-    text-align: center;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+#pengeluaranSection, #penjualanSection, #hutangSection {
+    margin-bottom: 30px;
 }
 
-input[type="number"] {
-    width: 100px;
-    text-align: center;
-    margin: 10px 0;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    padding: 5px;
-    font-size: 16px;
-}
-
-.add-button, .subtract-button {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: none;
-    background-color: #28a745;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.add-button:hover, .subtract-button:hover {
-    background-color: #218838;
-}
-
-.total {
-    grid-column: span 2; /* Membuat elemen total mengambil dua kolom */
-    text-align: center;
-    margin-top: 20px;
-    background-color: #f8f9fa;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.total h2 {
+label {
+    display: block;
+    margin-bottom: 5px;
     color: #333;
 }
 
-.controls {
-    text-align: center;
-    margin-top: 20px;
+input[type="number"],
+input[type="text"],
+input[type="date"] {
+    width: calc(100% - 10px);
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }
 
-.controls button {
-    margin: 0 10px;
+button {
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
@@ -88,8 +53,23 @@ input[type="number"] {
     color: white;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-right: 10px;
 }
 
-.controls button:hover {
+button:hover {
     background-color: #0056b3;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+li {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }

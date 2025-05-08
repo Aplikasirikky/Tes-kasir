@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Laporan</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Laporan Pengeluaran</h1>
+        <div id="pengeluaranSection">
+            <label for="pengeluaran">Pengeluaran: </label>
+            <input type="number" id="pengeluaran" placeholder="Jumlah pengeluaran">
+            <input type="date" id="tanggalPengeluaran">
+            <button onclick="tambahPengeluaran()">Tambah Pengeluaran</button>
+            <button onclick="resetPengeluaran()">Reset Pengeluaran</button>
+            <ul id="daftarPengeluaran"></ul>
+        </div>
+
+        <h1>Laporan Penjualan</h1>
+        <div id="penjualanSection">
+            <label for="hargaBeli">Harga Beli: </label>
+            <input type="number" id="hargaBeli" placeholder="Harga Beli">
+            <label for="hargaJual">Harga Jual: </label>
+            <input type="number" id="hargaJual" placeholder="Harga Jual">
+            <input type="date" id="tanggalPenjualan">
+            <button onclick="tambahPenjualan()">Tambah Penjualan</button>
+            <button onclick="resetPenjualan()">Reset Penjualan</button>
+            <ul id="daftarPenjualan"></ul>
+        </div>
+
+        <h1>Hutang Pelanggan</h1>
+        <div id="hutangSection">
+            <label for="namaPelanggan">Nama Pelanggan: </label>
+            <input type="text" id="namaPelanggan" placeholder="Nama Pelanggan">
+            <label for="hargaBeliHutang">Harga Beli: </label>
+            <input type="number" id="hargaBeliHutang" placeholder="Harga Beli">
+            <input type="date" id="tanggalHutang">
+            <button onclick="tambahHutang()">Tambah Hutang</button>
+            <button onclick="resetHutang()">Reset Hutang</button>
+            <ul id="daftarHutang"></ul>
+        </div>
+    </div>
+    <script src="laporan.js"></script>
+</body>
+</html>
