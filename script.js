@@ -131,6 +131,7 @@ function resetData() {
     totalKas = 0; // Reset total kas
     keuntungan = 0; // Reset keuntungan
     localStorage.clear();
+    resetHutang(); // Reset data hutang
     updateTotalKas();
     alert("Data telah direset.");
 }
