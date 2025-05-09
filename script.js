@@ -21,7 +21,7 @@ function addSaldo(id) {
     if (!isNaN(amount) && amount > 0) {
         let currentValue = parseInt(input.value.replace(/\D/g, '')) || 0;
         currentValue += amount;
-        input.value = formatRupiah(currentValue) // Simpan nilai mentah untuk pengolahan
+        input.value = currentValue; // Simpan nilai mentah untuk pengolahan
         saveSaldo(id, currentValue);
         updateTotalKas();
         alert("Saldo berhasil ditambahkan.");
