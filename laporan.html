@@ -17,7 +17,16 @@
             <input type="date" id="tanggalPengeluaran">
             <button onclick="tambahPengeluaran()">Tambah Pengeluaran</button>
             <button onclick="resetPengeluaran()">Reset Pengeluaran</button>
-            <ul id="daftarPengeluaran"></ul>
+            <table id="tabelPengeluaran">
+                <thead>
+                    <tr>
+                        <th>Jumlah Pengeluaran</th>
+                        <th>Rincian</th>
+                        <th>Tanggal</th>
+                    </tr>
+                </thead>
+                <tbody id="daftarPengeluaran"></tbody>
+            </table>
         </div>
 
         <h1>Laporan Penjualan</h1>
@@ -29,7 +38,16 @@
             <input type="date" id="tanggalPenjualan">
             <button onclick="tambahPenjualan()">Tambah Penjualan</button>
             <button onclick="resetPenjualan()">Reset Penjualan</button>
-            <ul id="daftarPenjualan"></ul>
+            <table id="tabelPenjualan">
+                <thead>
+                    <tr>
+                        <th>Harga Beli</th>
+                        <th>Harga Jual</th>
+                        <th>Tanggal</th>
+                    </tr>
+                </thead>
+                <tbody id="daftarPenjualan"></tbody>
+            </table>
         </div>
 
         <h1>Hutang Pelanggan</h1>
@@ -38,10 +56,22 @@
             <input type="text" id="namaPelanggan" placeholder="Nama Pelanggan">
             <label for="hargaBeliHutang">Harga Beli: </label>
             <input type="number" id="hargaBeliHutang" placeholder="Harga Beli">
+            <label for="hargaJualHutang">Harga Jual: </label>
+            <input type="number" id="hargaJualHutang" placeholder="Harga Jual">
             <input type="date" id="tanggalHutang">
             <button onclick="tambahHutang()">Tambah Hutang</button>
             <button onclick="bayarHutang()">Bayar Hutang</button>
-            <ul id="daftarHutang"></ul>
+            <table id="tabelHutang">
+                <thead>
+                    <tr>
+                        <th>Nama Pelanggan</th>
+                        <th>Harga Beli</th>
+                        <th>Harga Jual</th>
+                        <th>Tanggal</th>
+                    </tr>
+                </thead>
+                <tbody id="daftarHutang"></tbody>
+            </table>
         </div>
     </div>
     <script src="laporan.js"></script>

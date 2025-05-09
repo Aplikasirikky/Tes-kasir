@@ -27,16 +27,18 @@ function loadData() {
 // Fungsi untuk menambah pengeluaran
 function tambahPengeluaran() {
     const pengeluaran = parseInt(document.getElementById('pengeluaran').value);
+    const rincian = document.getElementById('rincianPengeluaran').value;
     const tanggal = document.getElementById('tanggalPengeluaran').value;
 
-    if (!isNaN(pengeluaran) && pengeluaran > 0 && tanggal) {
-        pengeluaranList.push({ pengeluaran, tanggal });
+    if (!isNaN(pengeluaran) && pengeluaran > 0 && rincian && tanggal) {
+        pengeluaranList.push({ pengeluaran, rincian, tanggal });
         document.getElementById('pengeluaran').value = '';
+        document.getElementById('rincianPengeluaran').value = '';
         document.getElementById('tanggalPengeluaran').value = '';
         updateDaftarPengeluaran();
         saveData(); // Simpan data setelah ditambahkan
     } else {
-        alert("Masukkan pengeluaran dan tanggal yang valid.");
+        alert("Masukkan pengeluaran, rincian, dan tanggal yang valid.");
     }
 }
 
@@ -45,9 +47,9 @@ function updateDaftarPengeluaran() {
     const daftar = document.getElementById('daftarPengeluaran');
     daftar.innerHTML = '';
     pengeluaranList.forEach(item => {
-        const li = document.createElement('li');
-        li.innerText = `Rp ${item.pengeluaran} pada ${item.tanggal}`;
-        daftar.appendChild(li);
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>Rp ${item.pengeluaran}</td><td>${item.rincian}</td><td>${item.tanggal}</td>`;
+        daftar.appendChild(tr);
     });
 }
 
@@ -71,7 +73,6 @@ function tambahPenjualan() {
         document.getElementById('tanggalPenjualan').value = '';
         updateDaftarPenjualan();
         saveData(); // Simpan data setelah ditambahkan
-        
     } else {
         alert("Masukkan harga beli, harga jual, dan tanggal yang valid.");
     }
@@ -82,9 +83,9 @@ function updateDaftarPenjualan() {
     const daftar = document.getElementById('daftarPenjualan');
     daftar.innerHTML = '';
     penjualanList.forEach(item => {
-        const li = document.createElement('li');
-        li.innerText = `Harga Beli: Rp ${item.hargaBeli}, Harga Jual: Rp ${item.hargaJual} pada ${item.tanggal}`;
-        daftar.appendChild(li);
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>Rp ${item.hargaBeli}</td><td>Rp ${item.hargaJual}</td><td>${item.tanggal}</td>`;
+        daftar.appendChild(tr);
     });
 }
 
@@ -102,15 +103,16 @@ function tambahHutang() {
     const hargaJual = parseInt(document.getElementById('hargaJualHutang').value);
     const tanggal = document.getElementById('tanggalHutang').value;
 
-    if (nama && !isNaN(hargaBeli) && hargaBeli > 0 && tanggal) {
-        hutangList.push({ nama, hargaBeli, tanggal });
+    if (nama && !isNaN(hargaBeli) && hargaBeli > 0 && !isNaN(hargaJual) && hargaJual > 0 && tanggal) {
+        hutangList.push({ nama, hargaBeli, hargaJual, tanggal });
         document.getElementById('namaPelanggan').value = '';
         document.getElementById('hargaBeliHutang').value = '';
+        document.getElementById('hargaJualHutang').value = '';
         document.getElementById('tanggalHutang').value = '';
         updateDaftarHutang();
         saveData(); // Simpan data setelah ditambahkan
     } else {
-        alert("Masukkan nama pelanggan, harga beli, dan tanggal yang valid.");
+        alert("Masukkan nama pelanggan, harga beli, harga jual, dan tanggal yang valid.");
     }
 }
 
@@ -119,9 +121,9 @@ function updateDaftarHutang() {
     const daftar = document.getElementById('daftarHutang');
     daftar.innerHTML = '';
     hutangList.forEach(item => {
-        const li = document.createElement('li');
-        li.innerText = `Nama: ${item.nama}, Harga Beli: Rp ${item.hargaBeli}, Harga Jual: Rp ${item.hargaJual} pada ${item.tanggal}`;
-        daftar.appendChild(li);
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${item.nama}</td><td>Rp ${item.hargaBeli}</td><td>Rp ${item.hargaJual}</td><td>${item.tanggal}</td>`;
+        daftar.appendChild(tr);
     });
 }
 
