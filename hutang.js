@@ -51,23 +51,6 @@ function savePelanggan() {
     localStorage.setItem('daftarPelanggan', JSON.stringify(daftarPelanggan));
 }
 
-// Menampilkan daftar pelanggan
-function tampilkanDaftarPelanggan() {
-    const daftarPelangganUl = document.getElementById('daftarPelanggan');
-    daftarPelangganUl.innerHTML = ''; // Kosongkan daftar sebelumnya
-
-    daftarPelanggan.forEach(pelanggan => {
-        const li = document.createElement('li');
-        li.textContent = pelanggan;
-        li.onclick = () => {
-            tampilkanHutang(pelanggan); // Menampilkan hutang pelanggan saat nama diklik
-        };
-        daftarPelangganUl.appendChild(li);
-    });
-    
-    daftarPelangganUl.style.display = 'block'; // Tampilkan daftar pelanggan
-}
-
 // Menampilkan hutang untuk pelanggan yang dipilih
 function tampilkanHutang(nama) {
     const rincianDiv = document.getElementById('daftarHutang');
