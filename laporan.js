@@ -27,24 +27,16 @@ function loadData() {
 // Fungsi untuk menambah pengeluaran
 function tambahPengeluaran() {
     const pengeluaran = parseInt(document.getElementById('pengeluaran').value);
-    const rincian = document.getElementById('rincianPengeluaran').value;
     const tanggal = document.getElementById('tanggalPengeluaran').value;
 
-    if (!isNaN(pengeluaran) && pengeluaran > 0 && rincian && tanggal) {
-        pengeluaranList.push({ pengeluaran, rincian, tanggal });
+    if (!isNaN(pengeluaran) && pengeluaran > 0 && tanggal) {
+        pengeluaranList.push({ pengeluaran, tanggal });
         document.getElementById('pengeluaran').value = '';
-        document.getElementById('rincianPengeluaran').value = '';
         document.getElementById('tanggalPengeluaran').value = '';
-
-        // Mengurangi uang tunai
-        let currentUangTunai = parseInt(document.getElementById('uangTunai').value.replace(/\D/g, '')) || 0;
-        currentUangTunai -= pengeluaran;
-        document.getElementById('uangTunai').value = currentUangTunai;
-
         updateDaftarPengeluaran();
         saveData(); // Simpan data setelah ditambahkan
     } else {
-        alert("Masukkan pengeluaran, rincian, dan tanggal yang valid.");
+        alert("Masukkan pengeluaran dan tanggal yang valid.");
     }
 }
 
@@ -54,7 +46,7 @@ function updateDaftarPengeluaran() {
     daftar.innerHTML = '';
     pengeluaranList.forEach(item => {
         const li = document.createElement('li');
-        li.innerText = `Rp ${item.pengeluaran} (${item.rincian}) pada ${item.tanggal}`;
+        li.innerText = `Rp ${item.pengeluaran} pada ${item.tanggal}`;
         daftar.appendChild(li);
     });
 }
@@ -77,19 +69,9 @@ function tambahPenjualan() {
         document.getElementById('hargaBeli').value = '';
         document.getElementById('hargaJual').value = '';
         document.getElementById('tanggalPenjualan').value = '';
-
-        // Mengurangi saldo pulsa
-        let saldoPulsa = parseInt(document.getElementById('saldoPulsa').value.replace(/\D/g, '')) || 0;
-        saldoPulsa -= hargaBeli;
-        document.getElementById('saldoPulsa').value = saldoPulsa;
-
-        // Menambah uang tunai
-        let currentUangTunai = parseInt(document.getElementById('uangTunai').value.replace(/\D/g, '')) || 0;
-        currentUangTunai += hargaJual;
-        document.getElementById('uangTunai').value = currentUangTunai;
-
         updateDaftarPenjualan();
         saveData(); // Simpan data setelah ditambahkan
+        
     } else {
         alert("Masukkan harga beli, harga jual, dan tanggal yang valid.");
     }
@@ -117,6 +99,7 @@ function resetPenjualan() {
 function tambahHutang() {
     const nama = document.getElementById('namaPelanggan').value;
     const hargaBeli = parseInt(document.getElementById('hargaBeliHutang').value);
+    const hargaJual = parseInt(document.getElementById('hargaJualHutang').value);
     const tanggal = document.getElementById('tanggalHutang').value;
 
     if (nama && !isNaN(hargaBeli) && hargaBeli > 0 && tanggal) {
@@ -124,12 +107,6 @@ function tambahHutang() {
         document.getElementById('namaPelanggan').value = '';
         document.getElementById('hargaBeliHutang').value = '';
         document.getElementById('tanggalHutang').value = '';
-
-        // Mengurangi saldo pulsa
-        let saldoPulsa = parseInt(document.getElementById('saldoPulsa').value.replace(/\D/g, '')) || 0;
-        saldoPulsa -= hargaBeli;
-        document.getElementById('saldoPulsa').value = saldoPulsa;
-
         updateDaftarHutang();
         saveData(); // Simpan data setelah ditambahkan
     } else {
@@ -143,30 +120,9 @@ function updateDaftarHutang() {
     daftar.innerHTML = '';
     hutangList.forEach(item => {
         const li = document.createElement('li');
-        li.innerText = `Nama: ${item.nama}, Harga Beli: Rp ${item.hargaBeli} pada ${item.tanggal}`;
+        li.innerText = `Nama: ${item.nama}, Harga Beli: Rp ${item.hargaBeli}, Harga Jual: Rp ${item.hargaJual} pada ${item.tanggal}`;
         daftar.appendChild(li);
     });
-}
-
-// Fungsi untuk membayar hutang
-function bayarHutang() {
-    const nama = document.getElementById('namaPelanggan').value;
-    const hargaJual = parseInt(document.getElementById('hargaBeliHutang').value); // Menggunakan harga beli sebagai hutang yang dibayar
-
-    const hutang = hutangList.find(item => item.nama === nama);
-    if (hutang) {
-        // Menambah uang tunai dengan harga jual
-        let currentUangTunai = parseInt(document.getElementById('uangTunai').value.replace(/\D/g, '')) || 0;
-        currentUangTunai += hargaJual;
-        document.getElementById('uangTunai').value = currentUangTunai;
-
-        // Menghapus hutang yang telah dibayar
-        hutangList = hutangList.filter(item => item.nama !== nama);
-        updateDaftarHutang();
-        saveData(); // Simpan data setelah dibayar
-    } else {
-        alert("Hutang tidak ditemukan untuk pelanggan tersebut.");
-    }
 }
 
 // Fungsi untuk mereset hutang
