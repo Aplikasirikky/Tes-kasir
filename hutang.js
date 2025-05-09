@@ -146,3 +146,12 @@ function saveHutang() {
 function kembaliKeDaftarPelanggan() {
     displayPelanggan();
 }
+
+// Tambahkan fungsi untuk mereset data hutang
+function resetHutang() {
+    daftarHutang = {};
+    daftarPelanggan = [];
+    saveHutang();
+    savePelanggan();
+    alert("Data hutang telah direset.");
+}
