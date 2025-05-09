@@ -184,30 +184,8 @@ function uploadData(event) {
 }
 
 function ambilKeuntungan() {
-    if (keuntungan > 0) {
-        let currentUangTunai = parseInt(document.getElementById('uangTunai').value.replace(/\D/g, '')) || 0;
-        
-        // Kurangi uang tunai dengan keuntungan
-        currentUangTunai -= keuntungan;
-
-        // Pastikan uang tunai tidak negatif
-        if (currentUangTunai < 0) {
-            alert("Uang tunai tidak cukup untuk mengambil keuntungan.");
-            return;
-        }
-
-        document.getElementById('uangTunai').value = currentUangTunai; // Update nilai uang tunai
-        saveSaldo('uangTunai', currentUangTunai); // Simpan uang tunai yang telah diupdate
-
-        keuntungan = 0; // Mengosongkan keuntungan
-        saveSaldo('keuntungan', keuntungan); // Simpan keuntungan yang telah direset
-        displayResults(); // Perbarui tampilan keuntungan dan total kas
-        alert("Keuntungan telah diambil dan dikurangi dari uang tunai.");
-    } else {
-        alert("Tidak ada keuntungan yang dapat diambil.");
-    }
-}
-
-function openLaporan() {
-    window.open('laporan.html', '_blank'); // Membuka halaman laporan di tab baru
+    keuntungan = 0; // Mengosongkan keuntungan
+    saveSaldo('keuntungan', keuntungan); // Simpan keuntungan yang telah direset
+    displayResults(); // Perbarui tampilan keuntungan
+    alert("Keuntungan telah diambil.");
 }
