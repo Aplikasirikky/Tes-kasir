@@ -21,7 +21,7 @@ function addSaldo(id) {
     if (!isNaN(amount) && amount > 0) {
         let currentValue = parseInt(input.value.replace(/\D/g, '')) || 0;
         currentValue += amount;
-        input.value = formatRupiah(currentValue); // Simpan nilai format rupiah
+        input.value = formatRupiah(currentValue) // Simpan nilai mentah untuk pengolahan
         saveSaldo(id, currentValue);
         updateTotalKas();
         alert("Saldo berhasil ditambahkan.");
@@ -37,7 +37,7 @@ function subtractTabungan() {
     if (!isNaN(amount) && amount > 0) {
         let currentValue = parseInt(input.value.replace(/\D/g, '')) || 0;
         currentValue -= amount; // Mengurangi tabungan investor
-        input.value = formatRupiah(currentValue); // Simpan nilai format rupiah
+        input.value = currentValue; // Simpan nilai mentah untuk pengolahan
         saveSaldo('tabunganInvestor', currentValue);
         updateTotalKas();
         alert("Tabungan investor berhasil dikurangi.");
@@ -54,12 +54,12 @@ function addPenjualan() {
         // Update saldo pulsa
         let saldoPulsa = parseInt(document.getElementById('saldoPulsa').value.replace(/\D/g, '')) || 0;
         saldoPulsa -= hargaBeli; // Mengurangi saldo pulsa dengan harga beli
-        document.getElementById('saldoPulsa').value = formatRupiah(saldoPulsa); // Update saldo pulsa
+        document.getElementById('saldoPulsa').value = saldoPulsa; // Update saldo pulsa
         
         // Menambah uang tunai dari harga jual
         let currentUangTunai = parseInt(document.getElementById('uangTunai').value.replace(/\D/g, '')) || 0;
         currentUangTunai += hargaJual; // Menambah uang tunai dengan harga jual
-        document.getElementById('uangTunai').value = formatRupiah(currentUangTunai); // Update nilai uang tunai
+        document.getElementById('uangTunai').value = currentUangTunai; // Update nilai uang tunai
 
         // Simpan uang tunai ke localStorage
         saveSaldo('uangTunai', currentUangTunai);
@@ -113,10 +113,10 @@ function loadSaldo() {
     const keuntunganStored = localStorage.getItem('keuntungan') || 0;
     const uangTunaiStored = localStorage.getItem('uangTunai') || 0; // Memuat uang tunai dari localStorage
 
-    document.getElementById('saldoPulsa').value = formatRupiah(saldoPulsa);
-    document.getElementById('saldoBank').value = formatRupiah(saldoBank);
-    document.getElementById('tabunganInvestor').value = formatRupiah(tabunganInvestor);
-    document.getElementById('uangTunai').value = formatRupiah(uangTunaiStored); // Memuat nilai uang tunai
+    document.getElementById('saldoPulsa').value = saldoPulsa;
+    document.getElementById('saldoBank').value = saldoBank;
+    document.getElementById('tabunganInvestor').value = tabunganInvestor;
+    document.getElementById('uangTunai').value = uangTunaiStored; // Memuat nilai uang tunai
     keuntungan = parseInt(keuntunganStored) || 0; // Memuat keuntungan dari localStorage
 
     // Update total kas berdasarkan data yang dimuat
@@ -124,10 +124,10 @@ function loadSaldo() {
 }
 
 function resetData() {
-    document.getElementById('saldoPulsa').value = formatRupiah(0);
-    document.getElementById('saldoBank').value = formatRupiah(0);
-    document.getElementById('tabunganInvestor').value = formatRupiah(0);
-    document.getElementById('uangTunai').value = formatRupiah(0); // Reset uang tunai
+    document.getElementById('saldoPulsa').value = 0;
+    document.getElementById('saldoBank').value = 0;
+    document.getElementById('tabunganInvestor').value = 0;
+    document.getElementById('uangTunai').value = 0; // Reset uang tunai
     totalKas = 0; // Reset total kas
     keuntungan = 0; // Reset keuntungan
     localStorage.clear();
@@ -138,10 +138,10 @@ function resetData() {
 
 function downloadData() {
     const data = {
-        saldoPulsa: document.getElementById('saldoPulsa').value.replace(/\D/g, ''),
-        saldoBank: document.getElementById('saldoBank').value.replace(/\D/g, ''),
-        tabunganInvestor: document.getElementById('tabunganInvestor').value.replace(/\D/g, ''),
-        uangTunai: document.getElementById('uangTunai').value.replace(/\D/g, ''), // Menyimpan uang tunai dalam data yang diunduh
+        saldoPulsa: document.getElementById('saldoPulsa').value,
+        saldoBank: document.getElementById('saldoBank').value,
+        tabunganInvestor: document.getElementById('tabunganInvestor').value,
+        uangTunai: document.getElementById('uangTunai').value, // Menyimpan uang tunai dalam data yang diunduh
         totalKas: totalKas, // Menyimpan total kas dalam data yang diunduh
         keuntungan: keuntungan // Menyimpan keuntungan dalam data yang diunduh
     };
@@ -164,10 +164,10 @@ function uploadData(event) {
         const reader = new FileReader();
         reader.onload = function(e) {
             const data = JSON.parse(e.target.result);
-            document.getElementById('saldoPulsa').value = formatRupiah(data.saldoPulsa || 0);
-            document.getElementById('saldoBank').value = formatRupiah(data.saldoBank || 0);
-            document.getElementById('tabunganInvestor').value = formatRupiah(data.tabunganInvestor || 0);
-            document.getElementById('uangTunai').value = formatRupiah(data.uangTunai || 0); // Memuat uang tunai dari file yang diunggah
+            document.getElementById('saldoPulsa').value = data.saldoPulsa || 0;
+            document.getElementById('saldoBank').value = data.saldoBank || 0;
+            document.getElementById('tabunganInvestor').value = data.tabunganInvestor || 0;
+            document.getElementById('uangTunai').value = data.uangTunai || 0; // Memuat uang tunai dari file yang diunggah
             totalKas = data.totalKas || 0; // Memuat total kas dari file yang diunggah
             keuntungan = data.keuntungan || 0; // Memuat keuntungan dari file yang diunggah
 
