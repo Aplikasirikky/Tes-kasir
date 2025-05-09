@@ -143,6 +143,14 @@ function saveHutang() {
     localStorage.setItem('daftarHutang', JSON.stringify(daftarHutang));
 }
 
+function loadHutang() {
+    const storedHutang = JSON.parse(localStorage.getItem('daftarHutang')) || {};
+    const storedPelanggan = JSON.parse(localStorage.getItem('daftarPelanggan')) || [];
+    daftarHutang = storedHutang;
+    daftarPelanggan = storedPelanggan;
+    displayDashboard();
+}
+
 function kembaliKeDaftarPelanggan() {
     displayPelanggan();
 }

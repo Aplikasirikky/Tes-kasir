@@ -141,9 +141,11 @@ function downloadData() {
         saldoPulsa: document.getElementById('saldoPulsa').value,
         saldoBank: document.getElementById('saldoBank').value,
         tabunganInvestor: document.getElementById('tabunganInvestor').value,
-        uangTunai: document.getElementById('uangTunai').value, // Menyimpan uang tunai dalam data yang diunduh
-        totalKas: totalKas, // Menyimpan total kas dalam data yang diunduh
-        keuntungan: keuntungan // Menyimpan keuntungan dalam data yang diunduh
+        uangTunai: document.getElementById('uangTunai').value,
+        totalKas: totalKas,
+        keuntungan: keuntungan,
+        daftarHutang: daftarHutang, // Tambahkan data hutang
+        daftarPelanggan: daftarPelanggan // Tambahkan daftar pelanggan
     };
     const jsonData = JSON.stringify(data, null, 4);
     const blob = new Blob([jsonData], { type: 'application/json' });
@@ -167,17 +169,23 @@ function uploadData(event) {
             document.getElementById('saldoPulsa').value = data.saldoPulsa || 0;
             document.getElementById('saldoBank').value = data.saldoBank || 0;
             document.getElementById('tabunganInvestor').value = data.tabunganInvestor || 0;
-            document.getElementById('uangTunai').value = data.uangTunai || 0; // Memuat uang tunai dari file yang diunggah
-            totalKas = data.totalKas || 0; // Memuat total kas dari file yang diunggah
-            keuntungan = data.keuntungan || 0; // Memuat keuntungan dari file yang diunggah
+            document.getElementById('uangTunai').value = data.uangTunai || 0;
+            totalKas = data.totalKas || 0;
+            keuntungan = data.keuntungan || 0;
 
+            // Memuat data hutang
+            daftarHutang = data.daftarHutang || {};
+            daftarPelanggan = data.daftarPelanggan || [];
             saveSaldo('saldoPulsa', data.saldoPulsa);
             saveSaldo('saldoBank', data.saldoBank);
             saveSaldo('tabunganInvestor', data.tabunganInvestor);
-            saveSaldo('uangTunai', data.uangTunai); // Menyimpan uang tunai yang diunggah
-            saveSaldo('keuntungan', keuntungan); // Menyimpan keuntungan yang diunggah
+            saveSaldo('uangTunai', data.uangTunai);
+            saveSaldo('keuntungan', keuntungan);
+            saveHutang();
+            savePelanggan();
 
             updateTotalKas();
+            displayDashboard(); // Tampilkan dashboard jika data hutang sudah dimuat
             alert("Data berhasil diunggah.");
         };
         reader.readAsText(file);
