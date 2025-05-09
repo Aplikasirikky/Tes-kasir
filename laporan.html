@@ -12,6 +12,8 @@
         <div id="pengeluaranSection">
             <label for="pengeluaran">Pengeluaran: </label>
             <input type="number" id="pengeluaran" placeholder="Jumlah pengeluaran">
+            <label for="rincianPengeluaran">Rincian: </label>
+            <input type="text" id="rincianPengeluaran" placeholder="Rincian Pengeluaran">
             <input type="date" id="tanggalPengeluaran">
             <button onclick="tambahPengeluaran()">Tambah Pengeluaran</button>
             <button onclick="resetPengeluaran()">Reset Pengeluaran</button>
@@ -38,7 +40,7 @@
             <input type="number" id="hargaBeliHutang" placeholder="Harga Beli">
             <input type="date" id="tanggalHutang">
             <button onclick="tambahHutang()">Tambah Hutang</button>
-            <button onclick="resetHutang()">Reset Hutang</button>
+            <button onclick="bayarHutang()">Bayar Hutang</button>
             <ul id="daftarHutang"></ul>
         </div>
     </div>
