@@ -1,6 +1,7 @@
 let daftarHutang = {};
 let daftarPelanggan = [];
 
+// Memuat data dari localStorage saat halaman dimuat
 document.addEventListener("DOMContentLoaded", loadHutang);
 
 function loadHutang() {
@@ -8,10 +9,10 @@ function loadHutang() {
     const storedPelanggan = JSON.parse(localStorage.getItem('daftarPelanggan')) || [];
     daftarHutang = storedHutang;
     daftarPelanggan = storedPelanggan;
-    displayHutang();
     displayPelanggan();
 }
 
+// Menampilkan daftar pelanggan
 function displayPelanggan() {
     const daftarPelangganUl = document.getElementById('daftarPelanggan');
     daftarPelangganUl.innerHTML = '';
@@ -20,12 +21,13 @@ function displayPelanggan() {
         const li = document.createElement('li');
         li.textContent = pelanggan;
         li.onclick = () => {
-            lihatHutang(pelanggan); // Menambahkan fungsi untuk melihat hutang pelanggan saat nama diklik
+            tampilkanHutang(pelanggan); // Menampilkan hutang pelanggan saat nama diklik
         };
         daftarPelangganUl.appendChild(li);
     });
 }
 
+// Menambahkan pelanggan baru
 function tambahPelanggan() {
     const namaPelanggan = document.getElementById('namaPelanggan').value;
     if (namaPelanggan) {
@@ -33,7 +35,6 @@ function tambahPelanggan() {
             daftarHutang[namaPelanggan] = [];
             daftarPelanggan.push(namaPelanggan);
             document.getElementById('namaPelanggan').value = '';
-            displayHutang();
             displayPelanggan();
             saveHutang();
             savePelanggan(); // Simpan daftar pelanggan ke localStorage
@@ -45,52 +46,27 @@ function tambahPelanggan() {
     }
 }
 
+// Menyimpan daftar pelanggan ke localStorage
 function savePelanggan() {
     localStorage.setItem('daftarPelanggan', JSON.stringify(daftarPelanggan));
 }
 
-function displayHutang() {
-    const daftarHutangDiv = document.getElementById('daftarHutang');
-    daftarHutangDiv.innerHTML = '';
-
-    for (const nama in daftarHutang) {
-        const hutangDiv = document.createElement('div');
-        hutangDiv.innerHTML = `
-            <h3>${nama}</h3>
-            <input type="text" placeholder="Harga Beli" id="hargaBeli-${nama}">
-            <input type="text" placeholder="Harga Jual" id="hargaJual-${nama}">
-            <button onclick="tambahHutang('${nama}')">Tambah Hutang</button>
-            <button onclick="lihatHutang('${nama}')">Lihat Hutang</button>
-            <div id="rincianHutang-${nama}"></div>
-        `;
-        daftarHutangDiv.appendChild(hutangDiv);
-    }
-    saveHutang();
+// Menampilkan hutang untuk pelanggan yang dipilih
+function tampilkanHutang(nama) {
+    const rincianDiv = document.getElementById('daftarHutang');
+    rincianDiv.style.display = 'block'; // Menampilkan rincian hutang
+    rincianDiv.innerHTML = `
+        <h3>Hutang untuk ${nama}</h3>
+        <input type="text" placeholder="Harga Beli" id="hargaBeli-${nama}">
+        <input type="text" placeholder="Harga Jual" id="hargaJual-${nama}">
+        <button onclick="tambahHutang('${nama}')">Tambah Hutang</button>
+        <div id="rincianHutang-${nama}"></div>
+    `;
+    displayRincianHutang(nama);
 }
 
-function tambahHutang(nama) {
-    const hargaBeli = parseInt(document.getElementById(`hargaBeli-${nama}`).value);
-    const hargaJual = parseInt(document.getElementById(`hargaJual-${nama}`).value);
-    const tanggal = new Date().toLocaleDateString();
-
-    if (!isNaN(hargaBeli) && hargaBeli > 0 && !isNaN(hargaJual) && hargaJual > 0) {
-        daftarHutang[nama].push({ tanggal, hargaBeli, hargaJual });
-        updateSaldo(hargaBeli);
-        displayHutang();
-    } else {
-        alert("Masukkan harga beli dan harga jual yang valid.");
-    }
-}
-
-function updateSaldo(hargaBeli) {
-    let saldoPulsa = parseInt(document.getElementById('saldoPulsa').value.replace(/\D/g, '')) || 0;
-    saldoPulsa -= hargaBeli;
-    document.getElementById('saldoPulsa').value = saldoPulsa;
-    saveSaldo('saldoPulsa', saldoPulsa);
-    updateTotalKas();
-}
-
-function lihatHutang(nama) {
+// Menampilkan rincian hutang
+function displayRincianHutang(nama) {
     const rincianDiv = document.getElementById(`rincianHutang-${nama}`);
     rincianDiv.innerHTML = `
         <table>
@@ -112,21 +88,36 @@ function lihatHutang(nama) {
     `;
 }
 
-function bayarHutang(nama, hargaJual) {
-    let uangTunai = parseInt(document.getElementById('uangTunai').value.replace(/\D/g, '')) || 0;
-    uangTunai += hargaJual;
-    document.getElementById('uangTunai').value = uangTunai;
-    saveSaldo('uangTunai', uangTunai);
-    updateTotalKas();
+// Menambah hutang untuk pelanggan
+function tambahHutang(nama) {
+    const hargaBeli = parseInt(document.getElementById(`hargaBeli-${nama}`).value);
+    const hargaJual = parseInt(document.getElementById(`hargaJual-${nama}`).value);
+    const tanggal = new Date().toLocaleDateString();
 
-    daftarHutang[nama] = daftarHutang[nama].filter(hutang => hutang.hargaJual !== hargaJual);
-    displayHutang();
+    if (!isNaN(hargaBeli) && hargaBeli > 0 && !isNaN(hargaJual) && hargaJual > 0) {
+        daftarHutang[nama].push({ tanggal, hargaBeli, hargaJual });
+        updateSaldo(hargaBeli);
+        displayRincianHutang(nama);
+        saveHutang();
+    } else {
+        alert("Masukkan harga beli dan harga jual yang valid.");
+    }
 }
 
+// Memperbarui saldo
+function updateSaldo(hargaBeli) {
+    let saldoPulsa = parseInt(document.getElementById('saldoPulsa').value.replace(/\D/g, '')) || 0;
+    saldoPulsa -= hargaBeli;
+    document.getElementById('saldoPulsa').value = saldoPulsa;
+    saveSaldo('saldoPulsa', saldoPulsa);
+}
+
+// Menyimpan hutang ke localStorage
 function saveHutang() {
     localStorage.setItem('daftarHutang', JSON.stringify(daftarHutang));
 }
 
+// Kembali ke dashboard
 function kembaliKeDashboard() {
-    document.getElementById('daftarHutang').innerHTML = '';
+    document.getElementById('daftarHutang').style.display = 'none'; // Menyembunyikan rincian hutang
 }
