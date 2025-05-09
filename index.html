@@ -9,7 +9,11 @@
 <body>
     <div class="container">
         <h1>Manajemen Saldo</h1>
-        <div class="dashboard">
+        <div class="dashboard" id="daftarHutang">
+            <button onclick="tambahPelanggan()">Tambah Pelanggan</button>
+            <button onclick="displayPelanggan()">Daftar Pelanggan</button>
+        </div>
+        <div class="saldo-section">
             <div class="saldo">
                 <label for="saldoPulsa">Saldo Pulsa: </label>
                 <input type="number" id="saldoPulsa" value="0" readonly>
@@ -49,14 +53,8 @@
             <button onclick="document.getElementById('upload').click();">Upload</button>
         </div>
         
-        <div class="hutang">
+        <div class="hutang" id="hutangSection" style="display: none;">
             <h2>Pengelolaan Hutang</h2>
-            <input type="text" id="namaPelanggan" placeholder="Nama Pelanggan">
-            <button onclick="tambahPelanggan()">Tambah Pelanggan</button>
-            
-            <h3>Daftar Pelanggan:</h3>
-            <ul id="daftarPelanggan"></ul> <!-- Menambahkan daftar pelanggan -->
-            
             <div id="daftarHutang"></div>
             <button onclick="kembaliKeDashboard()">Kembali ke Dashboard</button>
         </div>
