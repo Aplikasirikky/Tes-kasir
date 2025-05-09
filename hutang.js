@@ -1,11 +1,29 @@
 let daftarHutang = {};
+let daftarPelanggan = [];
 
 document.addEventListener("DOMContentLoaded", loadHutang);
 
 function loadHutang() {
     const storedHutang = JSON.parse(localStorage.getItem('daftarHutang')) || {};
+    const storedPelanggan = JSON.parse(localStorage.getItem('daftarPelanggan')) || [];
     daftarHutang = storedHutang;
+    daftarPelanggan = storedPelanggan;
     displayHutang();
+    displayPelanggan();
+}
+
+function displayPelanggan() {
+    const daftarPelangganUl = document.getElementById('daftarPelanggan');
+    daftarPelangganUl.innerHTML = '';
+
+    daftarPelanggan.forEach(pelanggan => {
+        const li = document.createElement('li');
+        li.textContent = pelanggan;
+        li.onclick = () => {
+            lihatHutang(pelanggan); // Menambahkan fungsi untuk melihat hutang pelanggan saat nama diklik
+        };
+        daftarPelangganUl.appendChild(li);
+    });
 }
 
 function tambahPelanggan() {
@@ -13,12 +31,22 @@ function tambahPelanggan() {
     if (namaPelanggan) {
         if (!daftarHutang[namaPelanggan]) {
             daftarHutang[namaPelanggan] = [];
+            daftarPelanggan.push(namaPelanggan);
+            document.getElementById('namaPelanggan').value = '';
+            displayHutang();
+            displayPelanggan();
+            saveHutang();
+            savePelanggan(); // Simpan daftar pelanggan ke localStorage
+        } else {
+            alert("Pelanggan sudah ada.");
         }
-        document.getElementById('namaPelanggan').value = '';
-        displayHutang();
     } else {
         alert("Masukkan nama pelanggan.");
     }
+}
+
+function savePelanggan() {
+    localStorage.setItem('daftarPelanggan', JSON.stringify(daftarPelanggan));
 }
 
 function displayHutang() {
