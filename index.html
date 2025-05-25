@@ -8,8 +8,8 @@
 </head>
 <body>
     <div class="container">
-    <img src="images/sukses-cell.png" alt="SUKSES CELL" style="width: 100%; height: auto;">
-    <div class="dashboard">
+        <img src="images/sukses-cell.png" alt="SUKSES CELL" style="width: 100%; height: auto;">
+        <div class="dashboard">
             <div class="saldo">
                 <label for="saldoPulsa">Saldo Pulsa: </label>
                 <input type="number" id="saldoPulsa" value="0" readonly>
@@ -34,6 +34,10 @@
                 <label for="uangTunai">Uang Tunai: </label>
                 <input type="number" id="uangTunai" value="0" readonly>
                 <button class="add-button" onclick="addUangTunai()">+</button>
+            </div>
+            <div class="saldo">
+                <label for="topupAmount">Isi Saldo Pulsa: </label>
+                <input type="number" id="topupAmount" placeholder="Jumlah untuk diisi" oninput="updateSaldo()">
             </div>
             <div class="saldo total">
                 <h2>Total Kas: <span id="totalKas">Rp 0</span></h2>
@@ -60,15 +64,10 @@
             <div id="daftarHutang"></div>
             <button onclick="kembaliKeDashboard()" style="display: none;">Kembali ke Dashboard</button>
         </div>
-
-        <!-- Tombol baru untuk menambah pelanggan dan melihat daftar pelanggan 
-        <div class="additional-controls">
-            <button onclick="tambahPelanggan()">Tambah Pelanggan</button>
-            <button onclick="displayPelanggan()">Daftar Pelanggan</button>
-        </div>-->
     </div>
     <script src="script.js"></script>
     <script src="hutang.js"></script> <!-- Menghubungkan file hutang.js -->
     <script src="uangtunai.js"></script> <!-- Menghubungkan file uangtunai.js -->
+    <script src="topup.js"></script> <!-- Menghubungkan file topup.js -->
 </body>
 </html>
